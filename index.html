@@ -1,383 +1,411 @@
-<!-- ============================================ -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Scarlet Explica — Perimenopausia y menopausia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-.dynamic-summary {
-  background: linear-gradient(135deg, #F5F0FF 0%, #EDE9FE 100%);
-  border-radius: 20px;
-  padding: 18px;
-  margin: 20px 0;
-  border-left: 4px solid #8B5CF6;
+:root {
+  --violet:#4A1F8C;--violet-mid:#8B5CF6;--violet-light:#DDD6FE;
+  --violet-pale:#F5F0FF;--violet-deep:#2A1545;
+  --terracota:#C4714A;--terracota-light:#FDDDD0;
+  --verde:#4A7C59;--verde-light:#D1FAE5;
+  --crema:#FAF5FF;--text-main:#1A0A2E;--text-mid:#5A3D7A;
+  --text-soft:#9B7FCC;--border:#DDD6FE;
+  --amber:#FEF3C7;--amber-text:#92400E;
 }
-.dynamic-summary h4 {
-  font-family: 'DM Serif Display', serif;
-  font-size: 18px;
-  color: #4A1F8C;
-  margin-bottom: 8px;
-}
-.dynamic-summary p {
-  font-size: 13px;
-  color: #5A3D7A;
-  line-height: 1.6;
-  margin-bottom: 12px;
-}
-.dynamic-stage-tag {
-  display: inline-block;
-  background: #8B5CF6;
-  color: white;
-  padding: 4px 12px;
-  border-radius: 30px;
-  font-size: 11px;
-  font-weight: 500;
-  margin-top: 8px;
-}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--violet-pale);color:var(--text-main);min-height:100vh;}
+.app{max-width:480px;margin:0 auto;min-height:100vh;padding-bottom:4rem;}
 
-.pdf-btn {
-  background: linear-gradient(135deg, #4A1F8C 0%, #8B5CF6 100%);
-  color: white;
-  border: none;
-  border-radius: 40px;
-  padding: 14px 24px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  width: 100%;
-  margin: 16px 0;
-  transition: transform 0.2s;
+/* HEADER */
+.header{padding:2rem 1.5rem 0;margin-bottom:1.5rem;text-align:center;}
+.logo-text{
+  font-family:'Cormorant Garamond',serif;
+  font-size:42px;
+  font-weight:600;
+  background:linear-gradient(90deg,#A78BFA 0%,#F9A8D4 50%,#FCD34D 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  display:block;
+  line-height:1.1;
+  letter-spacing:0.01em;
 }
-.pdf-btn:hover {
-  transform: scale(1.02);
-}
+.tagline{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--violet-mid);margin-top:6px;font-weight:300;}
+.header-sub{font-size:13px;color:var(--text-soft);margin-top:8px;line-height:1.5;font-weight:300;}
 
-.newsletter-block {
-  background: linear-gradient(135deg, #4A1F8C 0%, #2A1545 100%);
-  border-radius: 20px;
-  padding: 24px 20px;
-  margin: 28px 0 16px;
-  text-align: center;
-}
-.newsletter-block h3 {
-  font-family: 'DM Serif Display', serif;
-  font-size: 20px;
-  color: white;
-  margin-bottom: 8px;
-}
-.newsletter-block p {
-  font-size: 12px;
-  color: #DDD6FE;
-  margin-bottom: 16px;
-}
-.newsletter-input-group {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-.newsletter-input-group input {
-  flex: 1;
-  min-width: 180px;
-  padding: 12px 14px;
-  border: none;
-  border-radius: 40px;
-  font-size: 13px;
-}
-.newsletter-input-group button {
-  background: #C4714A;
-  color: white;
-  border: none;
-  border-radius: 40px;
-  padding: 12px 24px;
-  font-weight: 500;
-  cursor: pointer;
-}
-.improvement-badge {
-  background: linear-gradient(135deg, #8B5CF6 0%, #4A1F8C 100%);
-  color: white;
-  padding: 2px 8px;
-  border-radius: 20px;
-  font-size: 10px;
-  font-weight: 500;
-  margin-left: 8px;
-  display: inline-block;
-  vertical-align: middle;
-}
+/* TABS NAV */
+.tabs{display:flex;gap:0;padding:0 1.5rem;margin-bottom:1.75rem;border-bottom:1px solid var(--border);}
+.tab{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:400;color:var(--text-soft);background:transparent;border:none;border-bottom:2px solid transparent;padding:10px 12px;cursor:pointer;white-space:nowrap;transition:color 0.15s,border-color 0.15s;margin-bottom:-1px;letter-spacing:0.02em;}
+.tab:hover{color:var(--violet-mid);}
+.tab.active{color:var(--violet);border-bottom-color:var(--violet);font-weight:500;}
+
+.section{display:none;padding:0 1.5rem;animation:fadeIn 0.25s ease;}
+.section.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(5px);}to{opacity:1;transform:translateY(0);}}
+
+/* TYPOGRAPHY */
+.section-label{font-size:10px;text-transform:uppercase;letter-spacing:0.16em;color:var(--violet-mid);font-weight:500;margin-bottom:0.4rem;}
+.section-title{font-family:'DM Serif Display',serif;font-size:22px;line-height:1.2;color:var(--violet-deep);margin-bottom:0.5rem;}
+.section-hint{font-size:13px;color:var(--text-soft);margin-bottom:1.25rem;line-height:1.6;font-weight:300;}
+
+/* QUIZ — SYMPTOM GRID */
+.sym-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1.5rem;}
+@media(max-width:380px){.sym-grid{grid-template-columns:1fr;}}
+.sym-btn{background:white;border:1px solid var(--border);border-radius:14px;padding:11px 13px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text-main);cursor:pointer;text-align:left;display:flex;align-items:flex-start;gap:10px;line-height:1.4;transition:all 0.15s;}
+.sym-btn:hover{border-color:var(--violet-mid);background:var(--violet-pale);}
+.sym-btn.on{background:#EDE9FE;border-color:var(--violet);color:var(--violet-deep);}
+.check-box{width:17px;height:17px;min-width:17px;border:1.5px solid var(--border);border-radius:4px;display:flex;align-items:center;justify-content:center;margin-top:1px;transition:all 0.15s;flex-shrink:0;}
+.sym-btn.on .check-box{background:var(--violet);border-color:var(--violet);}
+.check-mark{display:none;width:8px;height:5px;border-left:1.5px solid #fff;border-bottom:1.5px solid #fff;transform:rotate(-45deg) translateY(-1px);}
+.sym-btn.on .check-mark{display:block;}
+
+.quiz-cta{width:100%;background:var(--violet);color:white;border:none;border-radius:14px;padding:14px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:all 0.15s;letter-spacing:0.02em;}
+.quiz-cta:hover{background:var(--violet-mid);}
+.quiz-cta:disabled{opacity:0.35;cursor:default;}
+.quiz-cta:disabled:hover{background:var(--violet);}
+
+/* RESULT */
+.result-card{border:1px solid var(--border);border-radius:16px;padding:1.25rem 1.5rem;margin-bottom:1rem;background:white;}
+.result-eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:0.16em;color:var(--violet-mid);font-weight:500;margin-bottom:5px;}
+.result-title{font-family:'DM Serif Display',serif;font-size:20px;color:var(--violet-deep);margin-bottom:10px;line-height:1.2;}
+.result-body{font-size:13px;color:var(--text-mid);line-height:1.7;}
+.tag-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;}
+.tag{font-family:'DM Sans',sans-serif;font-size:11px;padding:3px 10px;border-radius:20px;font-weight:400;}
+.tag-violet{background:var(--violet-light);color:var(--violet);}
+.tag-terra{background:var(--terracota-light);color:#7A3E0E;}
+.tag-verde{background:var(--verde-light);color:#065F46;}
+.tag-amber{background:var(--amber);color:var(--amber-text);}
+
+.disclaimer{font-family:'DM Sans',sans-serif;font-size:11px;color:var(--text-soft);line-height:1.6;margin-top:1rem;padding:10px 14px;background:var(--violet-pale);border-radius:10px;border-left:3px solid var(--violet-light);}
+.reset-btn{background:transparent;border:1px solid var(--border);border-radius:10px;padding:8px 16px;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--text-soft);cursor:pointer;margin-top:0.75rem;transition:border-color 0.15s;}
+.reset-btn:hover{border-color:var(--violet-mid);color:var(--violet);}
+
+/* FASES — TIMELINE */
+.timeline{position:relative;padding-left:30px;}
+.timeline-line{position:absolute;left:10px;top:10px;bottom:10px;width:1px;background:var(--border);}
+.phase-item{position:relative;margin-bottom:10px;}
+.phase-dot{position:absolute;left:-30px;top:7px;width:20px;height:20px;border-radius:50%;border:3px solid var(--violet-pale);}
+.phase-card{background:white;border:1px solid var(--border);border-radius:16px;padding:1rem 1.25rem;cursor:pointer;transition:border-color 0.15s;}
+.phase-card:hover{border-color:var(--violet-mid);}
+.phase-card.open{border-color:var(--violet);}
+.phase-top{display:flex;justify-content:space-between;align-items:flex-start;}
+.phase-etiqueta{font-size:10px;text-transform:uppercase;letter-spacing:0.14em;font-weight:500;margin-bottom:3px;}
+.phase-nombre{font-family:'DM Serif Display',serif;font-size:16px;color:var(--violet-deep);margin-bottom:2px;}
+.phase-edad{font-size:12px;color:var(--text-soft);}
+.phase-chevron{font-size:11px;color:var(--text-soft);transition:transform 0.2s;flex-shrink:0;margin-top:4px;}
+.phase-card.open .phase-chevron{transform:rotate(180deg);}
+.phase-body{display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-size:13px;color:var(--text-mid);line-height:1.7;}
+.phase-card.open .phase-body{display:block;}
+.phase-sym-list{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;}
+
+/* SÍNTOMAS ACCORDION */
+.sym-accordion{margin-bottom:8px;border:1px solid var(--border);border-radius:14px;overflow:hidden;background:white;}
+.sym-header{display:flex;justify-content:space-between;align-items:center;padding:13px 15px;cursor:pointer;transition:background 0.1s;}
+.sym-header:hover{background:var(--violet-pale);}
+.sym-name{font-family:'DM Sans',sans-serif;font-size:14px;font-weight:400;color:var(--text-main);}
+.sym-chevron{font-size:11px;color:var(--text-soft);transition:transform 0.2s;}
+.sym-accordion.open .sym-chevron{transform:rotate(180deg);}
+.sym-body{display:none;padding:0 15px 15px;border-top:1px solid var(--border);}
+.sym-accordion.open .sym-body{display:block;}
+.sym-explanation{font-size:13px;color:var(--text-mid);line-height:1.7;margin-top:12px;}
+.hl-box{background:#EDE9FE;border-left:3px solid var(--violet-mid);border-radius:0 10px 10px 0;padding:11px 13px;font-size:12px;line-height:1.7;color:var(--violet);margin:10px 0 0;}
+.hl-box strong{color:var(--violet-deep);font-weight:500;}
+.verde-box{background:var(--verde-light);border-left:3px solid var(--verde);border-radius:0 10px 10px 0;padding:11px 13px;font-size:12px;line-height:1.7;color:#065F46;margin:10px 0 0;}
+.verde-box strong{color:#064E3B;font-weight:500;}
+
+/* MÉDICO */
+.doc-category{margin-bottom:1.75rem;}
+.doc-cat-title{font-family:'DM Serif Display',serif;font-size:17px;color:var(--violet-deep);margin-bottom:10px;}
+.doc-q{background:white;border:1px solid var(--border);border-radius:12px;padding:11px 14px;margin-bottom:7px;font-size:13px;color:var(--text-mid);line-height:1.55;display:flex;align-items:flex-start;gap:10px;}
+.doc-q-num{font-family:'DM Serif Display',serif;font-size:17px;color:var(--violet-mid);flex-shrink:0;width:20px;line-height:1.3;}
+
+/* FOOTER NOTE */
+.footer-note{font-size:11px;color:var(--text-soft);line-height:1.65;border-top:1px solid var(--border);padding-top:1.25rem;margin-top:1.75rem;text-align:center;}
+.footer-note strong{color:var(--text-mid);}
+
+/* CTA BOTTOM */
+.cta{background:var(--violet-deep);border-radius:20px;padding:22px;text-align:center;margin-top:2rem;}
+.cta-title{font-family:'DM Serif Display',serif;font-size:18px;color:var(--crema);margin-bottom:6px;font-style:italic;}
+.cta p{font-size:12px;color:var(--violet-light);margin-bottom:14px;line-height:1.6;}
 </style>
+</head>
+<body>
+<div class="app">
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<!-- HEADER -->
+<div class="header">
+  <span class="logo-text">Scarlet Explica</span>
+  <p class="tagline">Salud hormonal femenina</p>
+  <p class="header-sub">Perimenopausia y menopausia — sin drama, con ciencia</p>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <button class="tab active" onclick="showSection('quiz',this)">Quiz</button>
+  <button class="tab" onclick="showSection('fases',this)">Fases</button>
+  <button class="tab" onclick="showSection('sintomas',this)">¿Por qué pasa?</button>
+  <button class="tab" onclick="showSection('medico',this)">Tu consulta</button>
+</div>
+
+<!-- QUIZ -->
+<div class="section active" id="section-quiz">
+  <p class="section-label">Autoevaluación</p>
+  <h1 class="section-title">¿Qué está cambiando en tu cuerpo?</h1>
+  <p class="section-hint">Seleccioná los síntomas que notaste en los últimos 3 a 6 meses. No es un diagnóstico — es una brújula educativa.</p>
+  <div class="sym-grid" id="symptom-grid"></div>
+  <button class="quiz-cta" id="quiz-btn" onclick="calcularResultado()" disabled>Ver mi resultado</button>
+  <div id="quiz-result" style="display:none;margin-top:1.25rem;"></div>
+</div>
+
+<!-- FASES -->
+<div class="section" id="section-fases">
+  <p class="section-label">El proceso</p>
+  <h2 class="section-title">Las etapas de la transición</h2>
+  <p class="section-hint">La perimenopausia no es un evento único — es una secuencia con lógica propia. Tocá cada etapa para ver qué pasa en el cuerpo.</p>
+  <div class="timeline" id="phases-container">
+    <div class="timeline-line"></div>
+  </div>
+  <p class="footer-note"><strong>Fuente:</strong> Lara Briden, <em>Hormone Repair Manual</em> (2021). Más de 350 referencias científicas. Este recurso es educativo y no reemplaza la consulta médica.</p>
+</div>
+
+<!-- SÍNTOMAS -->
+<div class="section" id="section-sintomas">
+  <p class="section-label">Entendé tu cuerpo</p>
+  <h2 class="section-title">¿Por qué pasa cada cosa?</h2>
+  <p class="section-hint">Cada síntoma tiene una explicación hormonal. Tocá cualquiera para entender su origen y qué puede ayudar.</p>
+  <div id="symptoms-list"></div>
+  <p class="footer-note"><strong>Fuente:</strong> Lara Briden, <em>Hormone Repair Manual</em> (2021). Este recurso es educativo y no reemplaza la consulta médica.</p>
+</div>
+
+<!-- MÉDICO -->
+<div class="section" id="section-medico">
+  <p class="section-label">Para tu próxima consulta</p>
+  <h2 class="section-title">Preguntas que vale hacer</h2>
+  <p class="section-hint">Llegar con preguntas concretas cambia la calidad de la consulta — y le da a tu profesional de salud más contexto para ayudarte.</p>
+  <div id="doctor-content"></div>
+  <p class="footer-note"><strong>Fuente:</strong> Lara Briden, <em>Hormone Repair Manual</em> (2021). Este recurso es educativo y no reemplaza la consulta médica.</p>
+</div>
+
+</div><!-- /app -->
 
 <script>
-// ============================================
-// ESPERAR A QUE EL DOM ESTÉ COMPLETAMENTE CARGADO
-// ============================================
-document.addEventListener('DOMContentLoaded', function() {
-  
-  // Mapeo de síntomas a etapas
-  const symptomToStage = {
-    irregularidad: 'peri', nochesudor: 'peri', ansiedad: 'early',
-    sueno: 'mixed', sofoco: 'mixed', menorrea: 'early',
-    cerebro: 'mixed', libido: 'mixed', peso: 'late',
-    sequedad: 'late', mamas: 'early', palpitaciones: 'peri',
-    articular: 'mixed', uti: 'late', piel: 'late'
-  };
+const symptoms = [
+  {id:'irregularidad',label:'Ciclos irregulares',group:'peri'},
+  {id:'nochesudor',label:'Sudoración nocturna',group:'peri'},
+  {id:'ansiedad',label:'Ansiedad o irritabilidad',group:'peri'},
+  {id:'sueno',label:'Problemas de sueño',group:'peri'},
+  {id:'sofoco',label:'Sofocos / calores',group:'mixed'},
+  {id:'menorrea',label:'Menstruación más abundante',group:'early'},
+  {id:'cerebro',label:'Niebla mental / memoria',group:'mixed'},
+  {id:'libido',label:'Cambios en libido',group:'mixed'},
+  {id:'peso',label:'Aumento de peso abdominal',group:'late'},
+  {id:'sequedad',label:'Sequedad vaginal',group:'late'},
+  {id:'mamas',label:'Sensibilidad en mamas',group:'early'},
+  {id:'palpitaciones',label:'Palpitaciones',group:'peri'},
+  {id:'articular',label:'Dolores articulares',group:'mixed'},
+  {id:'uti',label:'Infecciones urinarias frecuentes',group:'late'},
+  {id:'piel',label:'Cambios en piel y cabello',group:'late'},
+];
 
-  // Detectar etapa
-  function detectStage() {
-    const selectedIds = [];
-    document.querySelectorAll('.sym-btn.on').forEach(btn => {
-      const text = btn.innerText.trim();
-      const symptom = symptoms.find(s => s.label === text);
-      if (symptom) selectedIds.push(symptom.id);
-    });
-    
-    if (selectedIds.length === 0) return null;
-    
-    const counts = { early: 0, peri: 0, mixed: 0, late: 0 };
-    selectedIds.forEach(id => {
-      const stage = symptomToStage[id];
-      if (stage) counts[stage]++;
-    });
-    
-    const earlyScore = counts.early + counts.peri;
-    const lateScore = counts.late + counts.mixed;
-    
-    if (earlyScore > lateScore) {
-      return { name: 'Inicio de transición', description: 'Tus síntomas son típicos del comienzo, cuando la progesterona empieza a bajar.', color: '#C4714A' };
-    } else if (lateScore > earlyScore) {
-      return { name: 'Transición avanzada', description: 'Tus síntomas son más de una etapa donde el estrógeno ya bajó o fluctúa más.', color: '#4A7C59' };
-    } else {
-      return { name: 'Transición activa', description: 'Tus síntomas abarcan diferentes momentos del proceso hormonal.', color: '#8B5CF6' };
-    }
+const fases = [
+  {
+    color:'#A07830',dot:'#A07830',
+    etiqueta:'Etapa 1',nombre:'Inicio de la transición',
+    edad:'Generalmente entre los 38 y 45 años',
+    desc:'El cuerpo empieza a producir menos progesterona, aunque los ciclos pueden seguir siendo regulares. El estrógeno puede estar incluso más alto de lo habitual — hasta 3 veces. Es la etapa que más sorprende porque todo parece "normal" y sin embargo algo claramente cambió.',
+    sims:['Ciclos que se acortan','Menstruación más abundante','Sensibilidad en mamas','Ansiedad o cambios de humor','Palpitaciones ocasionales'],
+    tags:[{t:'Progesterona ↓',c:'tag-terra'},{t:'Estrógeno alto o variable',c:'tag-amber'}]
+  },
+  {
+    color:'#8B5CF6',dot:'#8B5CF6',
+    etiqueta:'Etapa 2',nombre:'Transición activa',
+    edad:'Generalmente entre los 45 y 52 años',
+    desc:'Los ciclos empiezan a irregularizarse. El estrógeno fluctúa con más amplitud — sube y baja —, y esa variabilidad es la principal causa de los sofocos y el sueño alterado. Es la etapa más dinámica. Los síntomas son reales, tienen sentido hormonal y tienen solución.',
+    sims:['Ciclos irregulares','Sofocos diurnos y nocturnos','Insomnio o sueño fragmentado','Niebla mental','Ciclos de más de 60 días'],
+    tags:[{t:'Progesterona muy baja',c:'tag-terra'},{t:'Estrógeno fluctuante',c:'tag-violet'}]
+  },
+  {
+    color:'#4A7C59',dot:'#4A7C59',
+    etiqueta:'Etapa 3',nombre:'Menopausia',
+    edad:'A partir de 1 año sin menstruación',
+    desc:'La menopausia no es un evento — es una etapa que empieza cuando se cumple un año completo sin menstruación. El estrógeno se estabiliza en un nivel más bajo, que es simplemente el apropiado para este momento de la vida. Muchos síntomas de la etapa anterior empiezan a calmarse.',
+    sims:['Mayor estabilidad emocional','Sofocos que pueden continuar','Posible sequedad vaginal','Cambios en metabolismo','Sensación de nueva etapa'],
+    tags:[{t:'Estrógeno bajo y estable',c:'tag-verde'},{t:'Sin progesterona',c:'tag-terra'}]
+  },
+  {
+    color:'#5A3D7A',dot:'#5A3D7A',
+    etiqueta:'Etapa 4',nombre:'Posmenopausia',
+    edad:'Los años que siguen',
+    desc:'Una vez pasada la transición, el cuerpo se adapta a sus nuevos niveles hormonales. Muchas mujeres reportan mayor bienestar, claridad emocional y energía. El foco se traslada al cuidado de la salud ósea, cardiovascular y del tejido genitourinario a largo plazo.',
+    sims:['Mayor estabilidad general','Salud ósea como prioridad','Atención al tejido genitourinario','Posibles cambios en colesterol','Energía renovada'],
+    tags:[{t:'Niveles estables',c:'tag-verde'},{t:'Ventana de prevención',c:'tag-amber'}]
   }
+];
 
-  // Actualizar resumen dinámico
-  function updateDynamicSummary() {
-    const selectedBtns = document.querySelectorAll('.sym-btn.on');
-    const stage = detectStage();
-    
-    let summaryDiv = document.getElementById('dynamic-summary');
-    
-    if (selectedBtns.length > 0 && stage) {
-      if (!summaryDiv) {
-        summaryDiv = document.createElement('div');
-        summaryDiv.id = 'dynamic-summary';
-        summaryDiv.className = 'dynamic-summary';
-        const quizBtn = document.getElementById('quiz-btn');
-        if (quizBtn && quizBtn.parentNode) {
-          quizBtn.parentNode.insertBefore(summaryDiv, quizBtn);
-        }
-      }
-      
-      const symptomsList = Array.from(selectedBtns).map(btn => btn.innerText.trim()).join(', ');
-      summaryDiv.innerHTML = `
-        <h4>📋 Resumen de tu selección</h4>
-        <p><strong>Has marcado ${selectedBtns.length} síntoma(s):</strong> ${symptomsList}</p>
-        <p>${stage.description}</p>
-        <span class="dynamic-stage-tag" style="background: ${stage.color}">🎯 Etapa sugerida: ${stage.name}</span>
-      `;
-      summaryDiv.style.display = 'block';
-    } else if (summaryDiv) {
-      summaryDiv.style.display = 'none';
-    }
+const symptomsDetail = [
+  {
+    name:'Sofocos y sudoración nocturna',
+    exp:'Cuando el estrógeno baja de forma brusca, el hipotálamo — el termostato del cuerpo — interpreta ese cambio como exceso de calor y dispara una respuesta de enfriamiento: vasodilatación y sudoración. No es un error del cuerpo, es una respuesta neurológica a la variabilidad hormonal.',
+    phases:['Transición activa','Menopausia temprana'],
+    tip:'El magnesio y la taurina son los suplementos con mejor evidencia para reducir la frecuencia. El entrenamiento de fuerza y el yoga también mostraron beneficio en revisiones sistemáticas.',
+    tipColor:'hl-box'
+  },
+  {
+    name:'Ansiedad e irritabilidad',
+    exp:'La progesterona tiene un efecto calmante sobre el sistema nervioso — actúa sobre receptores GABA, los mismos que involucran algunos ansiolíticos. Cuando baja, esa protección natural se reduce. El estrógeno alto además activa los mastocitos, que liberan histamina: un neurotransmisor que puede generar irritabilidad o alerta excesiva.',
+    phases:['Inicio de transición','Transición activa'],
+    tip:'El magnesio es el primer recurso. La progesterona bioidéntica puede ser muy efectiva. La buena noticia: la ansiedad perimenopaúsica suele mejorar significativamente al llegar a la menopausia.',
+    tipColor:'hl-box'
+  },
+  {
+    name:'Problemas de sueño',
+    exp:'La progesterona promueve el sueño porque calma el sistema nervioso. Sin ella, dormirse cuesta más y el sueño se fragmenta. Los sofocos nocturnos también interrumpen el descanso. Es un efecto combinado con solución posible.',
+    phases:['Toda la transición'],
+    tip:'Magnesio glicinato antes de dormir (300 mg) tiene buena evidencia. Habitación fresca, evitar alcohol (que reduce la melatonina) y mantener horarios regulares hacen diferencia real.',
+    tipColor:'hl-box'
+  },
+  {
+    name:'Niebla mental y memoria',
+    exp:'El estrógeno tiene un rol neuroprotector: mejora la plasticidad sináptica, reduce la inflamación cerebral y apoya la producción de serotonina y acetilcolina. Cuando fluctúa, el cerebro se está recalibrando — reorganizando su química. No es demencia, es una transición neurológica temporal.',
+    phases:['Transición activa','Menopausia temprana'],
+    tip:'El entrenamiento de fuerza tiene evidencia sólida para la salud cerebral a largo plazo. Si la niebla mental es muy disruptiva en el trabajo o la vida diaria, vale conversarlo con tu médica.',
+    tipColor:'hl-box'
+  },
+  {
+    name:'Ciclos irregulares o más abundantes',
+    exp:'En el inicio de la transición, la progesterona cae primero pero el estrógeno puede seguir alto. Sin progesterona para equilibrar el engrosamiento del endometrio, la menstruación se vuelve más abundante. Más adelante, la ovulación se vuelve intermitente y los ciclos se irregularizan.',
+    phases:['Inicio de transición','Transición activa'],
+    tip:'La progesterona bioidéntica es el tratamiento más específico para el sangrado abundante en esta etapa. Ante sangrado muy intenso o inexplicable, siempre vale consultar.',
+    tipColor:'hl-box'
+  },
+  {
+    name:'Aumento de peso abdominal',
+    exp:'El estrógeno ayuda a mantener la sensibilidad a la insulina. Cuando baja, el cuerpo tiende a la resistencia insulínica, que favorece el almacenamiento de grasa en el abdomen. También cambia la distribución: de caderas y muslos hacia el centro. No es falta de voluntad — es fisiología del cambio hormonal.',
+    phases:['Transición activa','Menopausia'],
+    tip:'Proteína en cada comida, movimiento diario y entrenamiento de fuerza son las estrategias con mayor evidencia. Medir insulina en ayunas (además de glucosa) puede dar información muy útil.',
+    tipColor:'hl-box'
+  },
+  {
+    name:'Sequedad vaginal y molestias genitales',
+    exp:'El tejido vaginal, uretral y vesical tiene receptores de estrógeno. Sin el sostén hormonal, ese tejido se adelgaza, pierde elasticidad y lubricación natural, y el pH vaginal cambia. Esto forma parte del Síndrome Genitourinario de la Menopausia (GSM). Es muy frecuente y tiene tratamiento efectivo.',
+    phases:['Menopausia','Posmenopausia'],
+    tip:'El estrógeno vaginal local (estriol o estradiol) es el tratamiento más efectivo y, según el Colegio Americano de Ginecología, seguro incluso con antecedentes de cáncer de mama. Los hidratantes vaginales de pH ácido también ayudan como complemento.',
+    tipColor:'verde-box'
+  },
+  {
+    name:'Infecciones urinarias frecuentes',
+    exp:'El tejido uretral y vesical también depende del estrógeno para mantenerse saludable. Cuando baja, ese tejido se vuelve más delgado y vulnerable, y el microbioma vaginal — que normalmente tiene un rol protector — se altera. Esto puede hacer que las infecciones urinarias aparezcan con más frecuencia, incluso sin factores de riesgo previos.',
+    phases:['Menopausia','Posmenopausia'],
+    tip:'El estrógeno vaginal local tiene evidencia sólida para prevenir infecciones urinarias recurrentes en esta etapa. Los probióticos con Lactobacillus rhamnosus GR-1 y Lactobacillus reuteri RC-14 ayudan a restaurar el microbioma vaginal y también tienen efecto protector.',
+    tipColor:'verde-box'
+  },
+  {
+    name:'Cambios en libido',
+    exp:'La libido responde a múltiples hormonas: andrógenos (testosterona, DHEA), estrógeno y dopamina. En la transición confluyen varios factores: descenso hormonal, sueño alterado, posibles molestias físicas y el peso del estrés acumulado. No es que dejó de importar — el contexto biológico cambió.',
+    phases:['Toda la transición'],
+    tip:'Tratar la sequedad vaginal puede transformar la experiencia. El DHEA tópico mostró beneficio en estudios. Conversar con un/a profesional abierto/a al tema es el mejor punto de partida.',
+    tipColor:'hl-box'
+  },
+];
+
+const doctorCategories = [
+  {
+    title:'Para entender dónde estás',
+    qs:[
+      '¿Mis síntomas podrían estar relacionados con cambios hormonales de la perimenopausia?',
+      '¿Tiene sentido medir FSH, estradiol o progesterona en mi caso, o el diagnóstico es principalmente clínico?',
+      '¿Podría hacerme un perfil de insulina en ayunas además de glucosa?',
+      '¿Convendría descartar que haya algo tiroideo detrás de algunos de mis síntomas?',
+    ]
+  },
+  {
+    title:'Sobre el tratamiento hormonal',
+    qs:[
+      '¿Sería candidata para progesterona bioidéntica? ¿Cuáles son los pro y contra en mi caso?',
+      '¿Qué diferencia hay entre la progesterona bioidéntica y las progestinas sintéticas?',
+      '¿Qué opciones hay de estrógeno local para la sequedad vaginal o síntomas urinarios?',
+      '¿Es posible considerar terapia hormonal menopáusica (MHT) para mejorar mi calidad de vida?',
+    ]
+  },
+  {
+    title:'Sobre síntomas específicos',
+    qs:[
+      'Tengo infecciones urinarias frecuentes desde que empezaron estos cambios — ¿podría ser parte del cuadro hormonal?',
+      'Mi sangrado se volvió más abundante — ¿qué estudios harías para evaluarlo?',
+      'Mis sofocos interrumpen el sueño todas las noches — ¿qué opciones tengo para manejarlos?',
+      '¿A partir de qué momento conviene hacer una densitometría ósea?',
+    ]
+  },
+  {
+    title:'Para ir con más herramientas',
+    qs:[
+      '¿Hay algún recurso, especialista o referencia que me recomendés sobre este tema?',
+      '¿Cuándo tendría sentido volver a consultar o hacer seguimiento?',
+      '¿Hay cambios en mi dieta o estilo de vida que tendrían mayor impacto en esta etapa?',
+    ]
   }
+];
 
-  // Interceptar clicks en botones de síntomas
-  function enhanceSymptomButtons() {
-    const btns = document.querySelectorAll('.sym-btn');
-    btns.forEach(btn => {
-      if (!btn.hasAttribute('data-enhanced')) {
-        btn.setAttribute('data-enhanced', 'true');
-        const originalClick = btn.onclick;
-        btn.onclick = function(e) {
-          if (originalClick) originalClick.call(btn, e);
-          setTimeout(updateDynamicSummary, 10);
-          // Habilitar/deshabilitar botón de resultado
-          const anySelected = document.querySelectorAll('.sym-btn.on').length > 0;
-          const quizBtn = document.getElementById('quiz-btn');
-          if (quizBtn) quizBtn.disabled = !anySelected;
-        };
-      }
-    });
-  }
+// STATE
+const selected = new Set();
 
-  // Generar PDF
-  async function generatePDF() {
-    const selectedBtns = document.querySelectorAll('.sym-btn.on');
-    if (selectedBtns.length === 0) {
-      alert('Por favor, seleccioná al menos un síntoma.');
-      return;
-    }
-    
-    const stage = detectStage();
-    const symptomsList = Array.from(selectedBtns).map(btn => btn.innerText.trim());
-    
-    // Obtener preguntas del médico
-    const questionDivs = document.querySelectorAll('.doc-q');
-    const questions = Array.from(questionDivs).slice(0, 8).map(q => q.innerText.trim());
-    
-    const pdfContent = `
-      <!DOCTYPE html>
-      <html>
-      <head>
-        <meta charset="UTF-8">
-        <title>Mi resumen - Perimenopausia</title>
-        <style>
-          body { font-family: Arial, sans-serif; padding: 30px; max-width: 800px; margin: 0 auto; }
-          h1 { color: #4A1F8C; font-size: 24px; border-bottom: 2px solid #8B5CF6; padding-bottom: 10px; }
-          h2 { color: #5A3D7A; font-size: 18px; margin-top: 20px; }
-          .stage-box { background: ${stage?.color || '#8B5CF6'}15; padding: 15px; border-radius: 12px; margin: 15px 0; border-left: 4px solid ${stage?.color || '#8B5CF6'}; }
-          .symptom-list { background: #F5F0FF; padding: 12px; border-radius: 10px; margin: 10px 0; }
-          .question-list { margin: 10px 0; padding-left: 20px; }
-          .question-list li { margin: 8px 0; line-height: 1.5; }
-          .footer { margin-top: 30px; font-size: 11px; color: #9B7FCC; text-align: center; border-top: 1px solid #DDD6FE; padding-top: 15px; }
-        </style>
-      </head>
-      <body>
-        <h1>📋 Mi resumen personalizado</h1>
-        <p><strong>Fecha:</strong> ${new Date().toLocaleDateString()}</p>
-        
-        <div class="stage-box">
-          <h2>🎯 Tu perfil</h2>
-          <p><strong>Etapa sugerida:</strong> ${stage?.name || 'No determinado'}</p>
-          <p>${stage?.description || 'Completa el quiz para ver tu perfil personalizado.'}</p>
-        </div>
-        
-        <h2>📝 Síntomas seleccionados (${symptomsList.length})</h2>
-        <div class="symptom-list">
-          ${symptomsList.map(s => `• ${s}`).join('<br>')}
-        </div>
-        
-        <h2>🏥 Preguntas para llevar a tu médica</h2>
-        <div class="question-list">
-          <ol>
-            ${questions.map(q => `<li>${q}</li>`).join('')}
-          </ol>
-        </div>
-        
-        <div class="footer">
-          <p>Scarlet Explica — Salud hormonal femenina</p>
-          <p>Este documento es educativo y no reemplaza la consulta médica.</p>
-        </div>
-      </body>
-      </html>
-    `;
-    
-    const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = pdfContent;
-    tempDiv.style.position = 'absolute';
-    tempDiv.style.left = '-9999px';
-    tempDiv.style.top = '-9999px';
-    document.body.appendChild(tempDiv);
-    
-    try {
-      const canvas = await html2canvas(tempDiv.firstChild, { scale: 2 });
-      const imgData = canvas.toDataURL('image/png');
-      const { jsPDF } = window.jspdf;
-      const pdf = new jsPDF('p', 'mm', 'a4');
-      const imgWidth = 210;
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-      pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
-      pdf.save(`resumen-perimenopausia-${new Date().toISOString().slice(0,10)}.pdf`);
-      alert('✅ PDF generado correctamente');
-    } catch (err) {
-      console.error('Error:', err);
-      alert('Error al generar el PDF. Intentá de nuevo.');
-    }
-    
-    document.body.removeChild(tempDiv);
-  }
+function showSection(id, btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('section-'+id).classList.add('active');
+  btn.classList.add('active');
+}
 
-  // Agregar botón de PDF
-  function addPDFButton() {
-    const quizSection = document.getElementById('section-quiz');
-    if (quizSection && !document.getElementById('pdf-btn-custom')) {
-      const pdfBtn = document.createElement('button');
-      pdfBtn.id = 'pdf-btn-custom';
-      pdfBtn.className = 'pdf-btn';
-      pdfBtn.innerHTML = '📄 Generar mi resumen en PDF';
-      pdfBtn.onclick = generatePDF;
-      
-      const resultDiv = document.getElementById('quiz-result');
-      if (resultDiv) {
-        resultDiv.parentNode.insertBefore(pdfBtn, resultDiv.nextSibling);
-      } else {
-        quizSection.appendChild(pdfBtn);
-      }
-    }
-  }
-
-  // Agregar bloque de newsletter
-  function addNewsletterBlock() {
-    const medicoSection = document.getElementById('section-medico');
-    if (medicoSection && !document.getElementById('newsletter-block-custom')) {
-      const block = document.createElement('div');
-      block.id = 'newsletter-block-custom';
-      block.className = 'newsletter-block';
-      block.innerHTML = `
-        <h3>📚 Seguí aprendiendo con Scarlet</h3>
-        <p>Recibí más guías, tips y recursos sobre salud hormonal femenina.</p>
-        <div class="newsletter-input-group">
-          <input type="email" id="newsletter-email" placeholder="tu@email.com">
-          <button id="newsletter-subscribe">Suscribirme →</button>
-        </div>
-        <p style="font-size: 10px; margin-top: 12px; opacity: 0.7;">Recibirás contenido educativo. Sin spam.</p>
-      `;
-      medicoSection.appendChild(block);
-      
-      document.getElementById('newsletter-subscribe').onclick = () => {
-        const email = document.getElementById('newsletter-email').value;
-        if (email && email.includes('@')) {
-          alert(`📧 ¡Gracias! Enviaremos contenido a ${email}`);
-          document.getElementById('newsletter-email').value = '';
-          // Aquí puedes agregar tu Google Forms o EmailJS después
-        } else {
-          alert('Por favor, ingresá un email válido.');
-        }
-      };
-    }
-  }
-
-  // Agregar badge al título
-  function addBadge() {
-    const title = document.querySelector('.section-title');
-    if (title && !document.querySelector('.improvement-badge')) {
-      const badge = document.createElement('span');
-      badge.className = 'improvement-badge';
-      badge.innerHTML = '✨ Nueva guía PDF';
-      title.appendChild(badge);
-    }
-  }
-
-  // Observar cambios en el DOM (para cuando se muestre el resultado del quiz)
-  const observer = new MutationObserver(function() {
-    enhanceSymptomButtons();
-    addPDFButton();
-    addNewsletterBlock();
-    addBadge();
-    updateDynamicSummary();
-  });
-  
-  observer.observe(document.body, { childList: true, subtree: true });
-  
-  // Inicializar
-  enhanceSymptomButtons();
-  addPDFButton();
-  addNewsletterBlock();
-  addBadge();
-  updateDynamicSummary();
-  
-  // También actualizar cuando se haga clic en "Volver a hacer el quiz"
-  const originalResetQuiz = window.resetQuiz;
-  if (originalResetQuiz) {
-    window.resetQuiz = function() {
-      originalResetQuiz();
-      setTimeout(() => {
-        updateDynamicSummary();
-        const quizBtn = document.getElementById('quiz-btn');
-        if (quizBtn) quizBtn.disabled = true;
-      }, 50);
+// BUILD QUIZ
+function buildQuiz(){
+  const grid = document.getElementById('symptom-grid');
+  symptoms.forEach(s=>{
+    const btn = document.createElement('button');
+    btn.className = 'sym-btn';
+    btn.innerHTML = `<span class="check-box"><span class="check-mark"></span></span>${s.label}`;
+    btn.onclick = ()=>{
+      if(selected.has(s.id)){selected.delete(s.id);btn.classList.remove('on');}
+      else{selected.add(s.id);btn.classList.add('on');}
+      document.getElementById('quiz-btn').disabled = selected.size===0;
     };
+    grid.appendChild(btn);
+  });
+}
+
+function calcularResultado(){
+  const counts={early:0,peri:0,mixed:0,late:0};
+  selected.forEach(id=>{
+    const s=symptoms.find(x=>x.id===id);
+    if(s) counts[s.group]++;
+  });
+  const earlyScore=counts.early+counts.peri;
+  const lateScore=counts.late+counts.mixed;
+  if(selected.size===0) return;
+
+  const diff=Math.abs(earlyScore-lateScore);
+  const isMixed=diff<=2&&earlyScore>0&&lateScore>0;
+  let html='';
+
+  if(isMixed){
+    html=buildResult('Estás en plena transición',
+      'Tus síntomas abarcan diferentes momentos del proceso hormonal. Eso es completamente normal — la transición no es lineal. El cuerpo está en un período de ajuste dinámico donde las hormonas fluctúan con amplitud.',
+      [{t:'Transición activa',c:'tag-violet'},{t:'Fluctuación hormonal',c:'tag-amber'},{t:'Proceso con sentido',c:'tag-verde'}]);
+  } else if(earlyScore>lateScore){
+    html=buildResult('Señales del inicio de la transición',
+      'Tus síntomas son más típicos del comienzo del proceso, cuando la progesterona empieza a bajar aunque el estrógeno puede seguir siendo alto. Es un momento que muchas veces pasa desapercibido — los ciclos todavía pueden ser regulares y sin embargo algo cambió.',
+      [{t:'Progesterona en descenso',c:'tag-terra'},{t:'Estrógeno variable',c:'tag-amber'},{t:'Etapa temprana',c:'tag-verde'}]);
+  } else {
+    html=buildResult('Señales de una transición más avanzada',
+      'Tus síntomas se parecen más a los de una etapa en la que el estrógeno ya bajó o fluctúa más. Sofocos, cambios de sueño, sequedad vaginal o síntomas urinarios son respuestas directas a ese cambio hormonal. Son incómodos y reales — y también tienen solución.',
+      [{t:'Estrógeno en descenso',c:'tag-terra'},{t:'Etapa avanzada o menopausia',c:'tag-amber'},{t:'Hay opciones de tratamiento',c:'tag-verde'}]);
   }
-  
-});
-</script>
-<!-- ============================================ -->
+
+  html+=`<p class="disclaimer">Esto es educación, no diagnóstico médico. El perfil perimenopaúsico se evalúa clínicamente — con historia, síntomas y a veces laboratorio. Si algo te afecta la calidad de vida, vale la pena consultarlo con un/a profesional de salud.</p>`;
+  html+=`<button class="reset-btn" onclick="resetQuiz()">Volver a hacer el quiz</button>`;
+
+  document.getElementById('quiz-btn').style.display='none';
+ 
