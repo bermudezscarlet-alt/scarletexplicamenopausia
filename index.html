@@ -1,0 +1,575 @@
+<!-- ============================================ -->
+<!-- MEJORAS UX – RESUMEN DINÁMICO + PDF + EMAIL   -->
+<!-- ============================================ -->
+<style>
+/* Estilos para las nuevas funcionalidades */
+.improvement-badge {
+  background: linear-gradient(135deg, #8B5CF6 0%, #4A1F8C 100%);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 500;
+  margin-left: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Feedback visual para elementos interactivos */
+.phase-card, .sym-header {
+  position: relative;
+}
+.phase-card:hover::after, .sym-header:hover::after {
+  content: "👆";
+  position: absolute;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Bloque de resumen dinámico */
+.dynamic-summary {
+  background: linear-gradient(135deg, #F5F0FF 0%, #EDE9FE 100%);
+  border-radius: 20px;
+  padding: 18px;
+  margin: 20px 0;
+  border-left: 4px solid #8B5CF6;
+}
+.dynamic-summary h4 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 18px;
+  color: #4A1F8C;
+  margin-bottom: 8px;
+}
+.dynamic-summary p {
+  font-size: 13px;
+  color: #5A3D7A;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+.dynamic-stage-tag {
+  display: inline-block;
+  background: #8B5CF6;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 30px;
+  font-size: 11px;
+  font-weight: 500;
+  margin-top: 8px;
+}
+
+/* Botón de PDF flotante */
+.pdf-fab {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #4A1F8C 0%, #8B5CF6 100%);
+  color: white;
+  width: 56px;
+  height: 56px;
+  border-radius: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(74, 31, 140, 0.3);
+  border: none;
+  font-size: 24px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  z-index: 1000;
+}
+.pdf-fab:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(74, 31, 140, 0.4);
+}
+
+/* Modal para email */
+.email-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  backdrop-filter: blur(4px);
+}
+.email-modal {
+  background: white;
+  border-radius: 24px;
+  max-width: 340px;
+  width: 90%;
+  padding: 28px 22px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+.email-modal h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px;
+  color: #4A1F8C;
+  margin-bottom: 8px;
+}
+.email-modal p {
+  font-size: 13px;
+  color: #5A3D7A;
+  margin-bottom: 20px;
+}
+.email-modal input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #DDD6FE;
+  border-radius: 12px;
+  font-size: 14px;
+  margin-bottom: 12px;
+  font-family: 'DM Sans', sans-serif;
+}
+.email-modal button {
+  width: 100%;
+  padding: 12px;
+  background: #4A1F8C;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 8px;
+}
+.email-modal .cancel-btn {
+  background: #EDE9FE;
+  color: #4A1F8C;
+  margin-top: 8px;
+}
+.close-modal {
+  margin-top: 12px;
+  font-size: 12px;
+  color: #9B7FCC;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+/* Bloque de newsletter */
+.newsletter-block {
+  background: linear-gradient(135deg, #4A1F8C 0%, #2A1545 100%);
+  border-radius: 20px;
+  padding: 24px 20px;
+  margin: 28px 0 16px;
+  text-align: center;
+}
+.newsletter-block h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 20px;
+  color: white;
+  margin-bottom: 8px;
+}
+.newsletter-block p {
+  font-size: 12px;
+  color: #DDD6FE;
+  margin-bottom: 16px;
+}
+.newsletter-input-group {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.newsletter-input-group input {
+  flex: 1;
+  min-width: 180px;
+  padding: 12px 14px;
+  border: none;
+  border-radius: 40px;
+  font-size: 13px;
+}
+.newsletter-input-group button {
+  background: #C4714A;
+  color: white;
+  border: none;
+  border-radius: 40px;
+  padding: 12px 24px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.newsletter-input-group button:hover {
+  background: #A55A3A;
+}
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<script>
+// ============================================
+// 1. PROCESAMIENTO DINÁMICO DE SÍNTOMAS
+// ============================================
+
+// Mapeo de síntomas a etapas (basado en tu lógica original)
+const symptomToStage = {
+  irregularidad: 'peri',
+  nochesudor: 'peri',
+  ansiedad: 'early',
+  sueno: 'mixed',
+  sofoco: 'mixed',
+  menorrea: 'early',
+  cerebro: 'mixed',
+  libido: 'mixed',
+  peso: 'late',
+  sequedad: 'late',
+  mamas: 'early',
+  palpitaciones: 'peri',
+  articular: 'mixed',
+  uti: 'late',
+  piel: 'late'
+};
+
+// Función para detectar etapa basada en síntomas seleccionados
+function detectStageFromSymptoms(selectedSymptoms) {
+  const counts = { early: 0, peri: 0, mixed: 0, late: 0 };
+  selectedSymptoms.forEach(id => {
+    const stage = symptomToStage[id];
+    if (stage) counts[stage]++;
+  });
+  
+  const total = selectedSymptoms.size;
+  if (total === 0) return null;
+  
+  const earlyScore = counts.early + counts.peri;
+  const lateScore = counts.late + counts.mixed;
+  const diff = Math.abs(earlyScore - lateScore);
+  const isMixed = diff <= 2 && earlyScore > 0 && lateScore > 0;
+  
+  if (isMixed) return { name: 'Transición activa', description: 'Estás en el punto medio de la transición, con síntomas de diferentes momentos del proceso hormonal.', color: '#8B5CF6' };
+  if (earlyScore > lateScore) return { name: 'Inicio de transición', description: 'Tus síntomas son más típicos del comienzo del proceso, cuando la progesterona empieza a bajar.', color: '#C4714A' };
+  return { name: 'Transición avanzada', description: 'Tus síntomas se parecen más a una etapa en la que el estrógeno ya bajó o fluctúa más.', color: '#4A7C59' };
+}
+
+// Función para actualizar el resumen dinámico
+function updateDynamicSummary() {
+  const selectedArray = Array.from(selected);
+  const stage = detectStageFromSymptoms(selected);
+  
+  let summaryDiv = document.getElementById('dynamic-summary');
+  if (!summaryDiv && selectedArray.length > 0) {
+    // Crear el div de resumen si no existe
+    const quizSection = document.getElementById('section-quiz');
+    const resultDiv = document.getElementById('quiz-result');
+    summaryDiv = document.createElement('div');
+    summaryDiv.id = 'dynamic-summary';
+    summaryDiv.className = 'dynamic-summary';
+    if (resultDiv && resultDiv.style.display !== 'block') {
+      resultDiv.parentNode.insertBefore(summaryDiv, resultDiv);
+    } else if (quizSection) {
+      quizSection.appendChild(summaryDiv);
+    }
+  }
+  
+  if (summaryDiv && selectedArray.length > 0 && stage) {
+    summaryDiv.innerHTML = `
+      <h4>📋 Resumen de tu selección</h4>
+      <p><strong>Has marcado ${selectedArray.length} síntoma(s):</strong> ${selectedArray.map(id => symptoms.find(s => s.id === id)?.label || id).join(', ')}</p>
+      <p>${stage.description}</p>
+      <span class="dynamic-stage-tag" style="background: ${stage.color}">🎯 Etapa sugerida: ${stage.name}</span>
+    `;
+    summaryDiv.style.display = 'block';
+  } else if (summaryDiv) {
+    summaryDiv.style.display = 'none';
+  }
+}
+
+// Interceptar la función original de selección de síntomas
+const originalOnClick = (btn, s) => {
+  return () => {
+    if(selected.has(s.id)){
+      selected.delete(s.id);
+      btn.classList.remove('on');
+    } else {
+      selected.add(s.id);
+      btn.classList.add('on');
+    }
+    document.getElementById('quiz-btn').disabled = selected.size === 0;
+    updateDynamicSummary(); // Actualizar resumen dinámico
+  };
+};
+
+// Reemplazar los eventos de los botones después de que se construyan
+function enhanceQuizButtons() {
+  const btns = document.querySelectorAll('.sym-btn');
+  symptoms.forEach((s, idx) => {
+    if (btns[idx]) {
+      const newClick = originalOnClick(btns[idx], s);
+      btns[idx].onclick = newClick;
+    }
+  });
+}
+
+// Esperar a que el DOM esté listo y mejorar los botones
+setTimeout(() => {
+  enhanceQuizButtons();
+  updateDynamicSummary();
+}, 100);
+
+// ============================================
+// 2. GENERACIÓN DE PDF PERSONALIZADO
+// ============================================
+
+function getFilteredQuestionsByStage() {
+  const selectedArray = Array.from(selected);
+  const stage = detectStageFromSymptoms(selected);
+  const stageName = stage?.name || '';
+  
+  // Todas las preguntas del médico
+  const allQuestions = [
+    { text: '¿Mis síntomas podrían estar relacionados con cambios hormonales de la perimenopausia?', category: 'entender' },
+    { text: '¿Tiene sentido medir FSH, estradiol o progesterona en mi caso, o el diagnóstico es principalmente clínico?', category: 'entender' },
+    { text: '¿Podría hacerme un perfil de insulina en ayunas además de glucosa?', category: 'entender' },
+    { text: '¿Convendría descartar que haya algo tiroideo detrás de algunos de mis síntomas?', category: 'entender' },
+    { text: '¿Sería candidata para progesterona bioidéntica? ¿Cuáles son los pro y contra en mi caso?', category: 'hormonal' },
+    { text: '¿Qué diferencia hay entre la progesterona bioidéntica y las progestinas sintéticas?', category: 'hormonal' },
+    { text: '¿Qué opciones hay de estrógeno local para la sequedad vaginal o síntomas urinarios?', category: 'hormonal' },
+    { text: '¿Es posible considerar terapia hormonal menopáusica (MHT) para mejorar mi calidad de vida?', category: 'hormonal' },
+    { text: 'Tengo infecciones urinarias frecuentes desde que empezaron estos cambios — ¿podría ser parte del cuadro hormonal?', category: 'sintomas' },
+    { text: 'Mi sangrado se volvió más abundante — ¿qué estudios harías para evaluarlo?', category: 'sintomas' },
+    { text: 'Mis sofocos interrumpen el sueño todas las noches — ¿qué opciones tengo para manejarlos?', category: 'sintomas' },
+    { text: '¿A partir de qué momento conviene hacer una densitometría ósea?', category: 'sintomas' },
+    { text: '¿Hay algún recurso, especialista o referencia que me recomendés sobre este tema?', category: 'herramientas' },
+    { text: '¿Cuándo tendría sentido volver a consultar o hacer seguimiento?', category: 'herramientas' },
+    { text: '¿Hay cambios en mi dieta o estilo de vida que tendrían mayor impacto en esta etapa?', category: 'herramientas' }
+  ];
+  
+  // Filtrar preguntas según la etapa
+  let filtered = [...allQuestions];
+  if (stageName === 'Inicio de transición') {
+    filtered = allQuestions.filter(q => q.category !== 'sintomas' || q.text.includes('sangrado') || q.text.includes('insulina'));
+  } else if (stageName === 'Transición avanzada') {
+    filtered = allQuestions.filter(q => q.category !== 'entender' || q.text.includes('densitometría'));
+  }
+  
+  return filtered.slice(0, 8); // Máximo 8 preguntas para el PDF
+}
+
+async function generatePDF() {
+  const selectedArray = Array.from(selected);
+  const stage = detectStageFromSymptoms(selected);
+  const symptomsList = selectedArray.map(id => symptoms.find(s => s.id === id)?.label || id);
+  const questions = getFilteredQuestionsByStage();
+  
+  // Crear contenido HTML para el PDF
+  const pdfContent = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="UTF-8">
+      <title>Mi resumen - Perimenopausia</title>
+      <style>
+        body { font-family: Arial, sans-serif; padding: 30px; max-width: 800px; margin: 0 auto; }
+        h1 { color: #4A1F8C; font-size: 24px; border-bottom: 2px solid #8B5CF6; padding-bottom: 10px; }
+        h2 { color: #5A3D7A; font-size: 18px; margin-top: 20px; }
+        .stage-box { background: ${stage?.color || '#8B5CF6'}15; padding: 15px; border-radius: 12px; margin: 15px 0; border-left: 4px solid ${stage?.color || '#8B5CF6'}; }
+        .symptom-list { background: #F5F0FF; padding: 12px; border-radius: 10px; margin: 10px 0; }
+        .question-list { margin: 10px 0; padding-left: 20px; }
+        .question-list li { margin: 8px 0; line-height: 1.5; }
+        .footer { margin-top: 30px; font-size: 11px; color: #9B7FCC; text-align: center; border-top: 1px solid #DDD6FE; padding-top: 15px; }
+      </style>
+    </head>
+    <body>
+      <h1>📋 Mi resumen personalizado</h1>
+      <p><strong>Fecha:</strong> ${new Date().toLocaleDateString()}</p>
+      
+      <div class="stage-box">
+        <h2>🎯 Tu perfil</h2>
+        <p><strong>Etapa sugerida:</strong> ${stage?.name || 'No determinado'}</p>
+        <p>${stage?.description || 'Completa el quiz para ver tu perfil personalizado.'}</p>
+      </div>
+      
+      <h2>📝 Síntomas seleccionados (${symptomsList.length})</h2>
+      <div class="symptom-list">
+        ${symptomsList.map(s => `• ${s}`).join('<br>')}
+      </div>
+      
+      <h2>🏥 Preguntas para llevar a tu médica</h2>
+      <div class="question-list">
+        <ol>
+          ${questions.map(q => `<li>${q.text}</li>`).join('')}
+        </ol>
+      </div>
+      
+      <div class="footer">
+        <p>Scarlet Explica — Salud hormonal femenina</p>
+        <p>Este documento es educativo y no reemplaza la consulta médica.</p>
+      </div>
+    </body>
+    </html>
+  `;
+  
+  // Usar html2canvas + jspdf para generar el PDF
+  const tempDiv = document.createElement('div');
+  tempDiv.innerHTML = pdfContent;
+  tempDiv.style.position = 'absolute';
+  tempDiv.style.left = '-9999px';
+  tempDiv.style.top = '-9999px';
+  document.body.appendChild(tempDiv);
+  
+  try {
+    const canvas = await html2canvas(tempDiv.firstChild, { scale: 2 });
+    const imgData = canvas.toDataURL('image/png');
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF('p', 'mm', 'a4');
+    const imgWidth = 210;
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+    pdf.save(`resumen-perimenopausia-${new Date().toISOString().slice(0,10)}.pdf`);
+  } catch (err) {
+    console.error('Error generando PDF:', err);
+    alert('Hubo un error generando el PDF. Por favor, intentá de nuevo.');
+  }
+  
+  document.body.removeChild(tempDiv);
+}
+
+// ============================================
+// 3. MODAL DE EMAIL + ENVÍO (EmailJS)
+// ============================================
+
+function showEmailModal() {
+  if (selected.size === 0) {
+    alert('Por favor, seleccioná al menos un síntoma antes de generar tu resumen.');
+    return;
+  }
+  
+  const modal = document.createElement('div');
+  modal.className = 'email-modal-overlay';
+  modal.innerHTML = `
+    <div class="email-modal">
+      <h3>📧 Tu resumen personalizado</h3>
+      <p>Ingresá tu email para recibir el PDF con tus síntomas y las preguntas para tu médica.</p>
+      <input type="email" id="pdf-email-input" placeholder="tu@email.com" autocomplete="email">
+      <button id="send-pdf-btn">📥 Enviar PDF por email</button>
+      <button class="cancel-btn" id="download-only-btn">💾 Solo descargar PDF</button>
+      <button class="close-modal" id="close-modal-btn">Cerrar</button>
+    </div>
+  `;
+  document.body.appendChild(modal);
+  
+  // Configurar EmailJS (necesitarás registrarte gratis en https://www.emailjs.com/)
+  // Por ahora, solo descarga local si no está configurado
+  document.getElementById('send-pdf-btn').onclick = async () => {
+    const email = document.getElementById('pdf-email-input').value;
+    if (!email || !email.includes('@')) {
+      alert('Por favor, ingresá un email válido.');
+      return;
+    }
+    
+    // Si quieres usar EmailJS, descomenta y configura:
+    /*
+    emailjs.init('TU_USER_ID');
+    try {
+      await emailjs.send('TU_SERVICE_ID', 'TU_TEMPLATE_ID', {
+        to_email: email,
+        pdf_link: 'El PDF se genera localmente, por ahora solo descarga'
+      });
+      alert('¡PDF enviado a ' + email + '! Revisá tu bandeja de entrada.');
+      modal.remove();
+    } catch(err) {
+      alert('Error al enviar. Por ahora podés descargar el PDF manualmente.');
+    }
+    */
+    
+    // Mientras tanto, descarga local y avisa
+    alert('📧 Función de envío por email en configuración. Por ahora, descargá el PDF manualmente.');
+    await generatePDF();
+    modal.remove();
+  };
+  
+  document.getElementById('download-only-btn').onclick = async () => {
+    await generatePDF();
+    modal.remove();
+  };
+  
+  document.getElementById('close-modal-btn').onclick = () => modal.remove();
+}
+
+// ============================================
+// 4. BOTÓN FLOTANTE DE PDF
+// ============================================
+
+function addFloatingPDFButton() {
+  const btn = document.createElement('button');
+  btn.className = 'pdf-fab';
+  btn.innerHTML = '📄';
+  btn.title = 'Generar resumen en PDF';
+  btn.onclick = showEmailModal;
+  document.body.appendChild(btn);
+}
+
+// ============================================
+// 5. BLOQUE DE NEWSLETTER (solo email)
+// ============================================
+
+function addNewsletterBlock() {
+  // Buscar dónde insertarlo (después de la sección médico)
+  const medicoSection = document.getElementById('section-medico');
+  if (medicoSection) {
+    const block = document.createElement('div');
+    block.className = 'newsletter-block';
+    block.innerHTML = `
+      <h3>📚 Seguí aprendiendo con Scarlet</h3>
+      <p>Recibí más guías, tips y recursos sobre salud hormonal femenina directamente en tu correo.</p>
+      <div class="newsletter-input-group">
+        <input type="email" id="newsletter-email" placeholder="tu@email.com">
+        <button id="newsletter-subscribe">Suscribirme →</button>
+      </div>
+      <p style="font-size: 10px; margin-top: 12px; opacity: 0.7;">Sin spam. Podés darte de baja cuando quieras.</p>
+    `;
+    medicoSection.appendChild(block);
+    
+    // Evento del newsletter
+    document.getElementById('newsletter-subscribe').onclick = () => {
+      const email = document.getElementById('newsletter-email').value;
+      if (!email || !email.includes('@')) {
+        alert('Por favor, ingresá un email válido.');
+        return;
+      }
+      // Aquí puedes conectar con Google Forms o EmailJS
+      alert(`📧 ¡Gracias por suscribirte! Enviaremos contenido a ${email}`);
+      document.getElementById('newsletter-email').value = '';
+    };
+  }
+}
+
+// ============================================
+// 6. AGREGAR ÍCONOS DE FEEDBACK VISUAL
+// ============================================
+
+function addVisualFeedback() {
+  // Añadir badges a los títulos de sección
+  const sectionTitles = document.querySelectorAll('.section-title');
+  if (sectionTitles[0]) {
+    const badge = document.createElement('span');
+    badge.className = 'improvement-badge';
+    badge.innerHTML = '✨ Nueva';
+    sectionTitles[0].appendChild(badge);
+  }
+}
+
+// ============================================
+// INICIALIZAR TODO
+// ============================================
+setTimeout(() => {
+  addFloatingPDFButton();
+  addNewsletterBlock();
+  addVisualFeedback();
+  // Forzar actualización del resumen después de que todo cargue
+  updateDynamicSummary();
+}, 500);
+</script>
+<!-- ============================================ -->
+<!-- FIN DE LAS MEJORAS                           -->
+<!-- ============================================ -->
