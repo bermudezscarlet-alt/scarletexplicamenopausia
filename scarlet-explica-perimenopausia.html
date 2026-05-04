@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¿Es perimenopausia? — Scarlet Explica</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --violet-deep: #4A1F8C;
+    --violet-mid: #8B5CF6;
+    --violet-light: #C4B5FD;
+    --violet-pale: #EDE9FE;
+    --terracota: #C4714A;
+    --verde: #4A7C59;
+    --crema: #FAF5FF;
+    --border: #E5E0F0;
+    --text-dark: #1C1035;
+    --text-mid: #4B4565;
+    --text-light: #8B85A0;
+    --white: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--crema);
+    color: var(--text-dark);
+    min-height: 100vh;
+    padding-bottom: 3rem;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--violet-deep);
+    padding: 1.25rem 1.5rem 1rem;
+    text-align: center;
+  }
+  .logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    background: linear-gradient(90deg, #C4B5FD 0%, #F0ABFC 50%, #C4714A 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 0.01em;
+  }
+  .logo-sub {
+    font-size: 11px;
+    color: var(--violet-light);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 3px;
+    font-weight: 400;
+  }
+
+  /* WRAPPER */
+  .app {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  /* HERO */
+  .hero {
+    text-align: center;
+    padding: 2rem 0 1.5rem;
+  }
+  .hero-eyebrow {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--terracota);
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  .hero-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    color: var(--violet-deep);
+    line-height: 1.25;
+    margin-bottom: 12px;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--violet-mid);
+  }
+  .hero-body {
+    font-size: 13.5px;
+    color: var(--text-mid);
+    line-height: 1.7;
+    max-width: 340px;
+    margin: 0 auto;
+  }
+
+  /* AGE GATE */
+  #age-screen { animation: fadeIn 0.4s ease; }
+  .age-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    margin-top: 0.5rem;
+  }
+  .age-emoji { font-size: 38px; margin-bottom: 1rem; }
+  .age-question {
+    font-family: 'DM Serif Display', serif;
+    font-size: 21px;
+    color: var(--violet-deep);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .age-hint {
+    font-size: 13px;
+    color: var(--text-light);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+  .age-input {
+    width: 100%;
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-size: 18px;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text-dark);
+    text-align: center;
+    outline: none;
+    transition: border-color 0.2s;
+    margin-bottom: 1rem;
+    background: var(--crema);
+  }
+  .age-input:focus { border-color: var(--violet-mid); }
+  .age-input::placeholder { color: var(--text-light); font-size: 15px; }
+  .age-cta {
+    width: 100%;
+    background: var(--violet-deep);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.1s;
+    letter-spacing: 0.02em;
+  }
+  .age-cta:disabled { opacity: 0.35; cursor: not-allowed; }
+  .age-cta:not(:disabled):hover { opacity: 0.88; }
+  .age-cta:not(:disabled):active { transform: scale(0.98); }
+
+  /* MAIN APP */
+  #app-main { animation: fadeIn 0.4s ease; }
+
+  /* TABS */
+  .tabs {
+    display: flex;
+    gap: 6px;
+    padding: 1rem 0 0.75rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab {
+    flex-shrink: 0;
+    padding: 7px 14px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1.5px solid var(--border);
+    color: var(--text-mid);
+    background: white;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .tab.active {
+    background: var(--violet-deep);
+    color: white;
+    border-color: var(--violet-deep);
+  }
+
+  /* SECTIONS */
+  .section { display: none; }
+  .section.visible { display: block; animation: fadeIn 0.3s ease; }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--violet-deep);
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+  .section-hint {
+    font-size: 13px;
+    color: var(--text-light);
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+  }
+
+  /* QUIZ */
+  .symptoms-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 1.25rem;
+  }
+  .sym-chip {
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 10px 10px;
+    font-size: 12px;
+    color: var(--text-mid);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    transition: all 0.15s;
+    line-height: 1.4;
+    user-select: none;
+  }
+  .sym-chip:hover { border-color: var(--violet-mid); }
+  .sym-chip.selected {
+    background: var(--violet-pale);
+    border-color: var(--violet-mid);
+    color: var(--violet-deep);
+  }
+  .sym-chip .chip-icon { font-size: 15px; flex-shrink: 0; }
+
+  .quiz-cta {
+    width: 100%;
+    background: var(--violet-deep);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.02em;
+  }
+  .quiz-cta:hover { opacity: 0.88; }
+
+  /* RESULT */
+  #quiz-result { display: none; animation: fadeIn 0.4s ease; }
+  .result-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .result-eyebrow {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--terracota);
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+  .result-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--violet-deep);
+    margin-bottom: 10px;
+    line-height: 1.25;
+  }
+  .result-body {
+    font-size: 13px;
+    color: var(--text-mid);
+    line-height: 1.7;
+    margin-bottom: 10px;
+  }
+  .result-phase {
+    display: inline-block;
+    background: var(--violet-pale);
+    color: var(--violet-deep);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 100px;
+    letter-spacing: 0.04em;
+  }
+
+  /* SUMMARY CARD */
+  .summary-card {
+    background: var(--violet-pale);
+    border: 1px solid var(--violet-light);
+    border-radius: 14px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+  .summary-title {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--violet-mid);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .summary-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .summary-tag {
+    background: white;
+    border: 1px solid var(--violet-light);
+    color: var(--violet-deep);
+    font-size: 11.5px;
+    padding: 4px 10px;
+    border-radius: 100px;
+    font-weight: 500;
+  }
+
+  /* NON-PERI RESULT */
+  .nonperi-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .nonperi-eyebrow {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--terracota);
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+  .nonperi-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--violet-deep);
+    margin-bottom: 10px;
+    line-height: 1.25;
+  }
+  .nonperi-body {
+    font-size: 13px;
+    color: var(--text-mid);
+    line-height: 1.7;
+  }
+  .cause-list {
+    margin: 12px 0 0;
+    padding-left: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .cause-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    font-size: 13px;
+    color: var(--text-mid);
+    line-height: 1.5;
+  }
+  .cause-dot {
+    width: 6px; height: 6px; min-width: 6px;
+    border-radius: 50%;
+    background: var(--terracota);
+    margin-top: 7px;
+  }
+
+  /* IG LINK */
+  .ig-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 13px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--violet-mid), var(--terracota));
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: opacity 0.15s;
+    margin-bottom: 1rem;
+  }
+  .ig-link:hover { opacity: 0.88; }
+
+  /* RESET */
+  .reset-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: none;
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 11px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--text-mid);
+    cursor: pointer;
+    margin-bottom: 1.5rem;
+    transition: border-color 0.2s;
+  }
+  .reset-btn:hover { border-color: var(--violet-mid); color: var(--violet-deep); }
+
+  /* FASES */
+  .phase-timeline { display: flex; flex-direction: column; gap: 12px; }
+  .phase-item {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1rem 1.25rem;
+    border-left: 4px solid var(--violet-mid);
+  }
+  .phase-item.peri-early { border-left-color: var(--verde); }
+  .phase-item.peri-late { border-left-color: var(--violet-mid); }
+  .phase-item.meno { border-left-color: var(--violet-deep); }
+  .phase-item.post { border-left-color: var(--terracota); }
+
+  .phase-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 17px;
+    color: var(--violet-deep);
+    margin-bottom: 3px;
+  }
+  .phase-timing {
+    font-size: 11px;
+    color: var(--terracota);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+  .phase-body {
+    font-size: 12.5px;
+    color: var(--text-mid);
+    line-height: 1.65;
+  }
+
+  /* SÍNTOMAS ACCORDION */
+  .sym-accordion {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    margin-bottom: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .sym-accordion:hover { border-color: var(--violet-light); }
+  .sym-accordion.open { border-color: var(--violet-mid); }
+  .sym-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 13px 14px;
+    gap: 10px;
+  }
+  .sym-label {
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--text-dark);
+    flex: 1;
+  }
+  .sym-chevron {
+    font-size: 12px;
+    color: var(--text-light);
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+  .sym-accordion.open .sym-chevron { transform: rotate(180deg); }
+  .sym-body {
+    display: none;
+    padding: 0 14px 14px;
+    border-top: 1px solid var(--violet-pale);
+  }
+  .sym-accordion.open .sym-body { display: block; }
+  .sym-explanation {
+    font-size: 13px;
+    color: var(--text-mid);
+    line-height: 1.7;
+    margin-top: 10px;
+    margin-bottom: 8px;
+  }
+  .sym-tip {
+    font-size: 12px;
+    color: var(--verde);
+    background: #F0F7F3;
+    border-radius: 10px;
+    padding: 10px 12px;
+    line-height: 1.6;
+  }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 8px; }
+  .tag {
+    font-size: 10px;
+    padding: 3px 9px;
+    border-radius: 100px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+  .tag-violet { background: var(--violet-pale); color: var(--violet-deep); }
+  .tag-rose { background: #FDF2F8; color: #9D174D; }
+  .tag-amber { background: #FFFBEB; color: #92400E; }
+
+  /* DOCTOR SECTION */
+  .doc-category { margin-bottom: 1.25rem; }
+  .doc-cat-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 16px;
+    color: var(--violet-deep);
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .doc-q {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--text-mid);
+    line-height: 1.6;
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--border);
+  }
+  .doc-q:last-child { border-bottom: none; }
+  .doc-q-mark {
+    color: var(--violet-mid);
+    font-weight: 700;
+    font-size: 14px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* BIBLIO */
+  .biblio-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.1rem 1.25rem;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .biblio-icon { font-size: 24px; flex-shrink: 0; }
+  .biblio-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 3px;
+  }
+  .biblio-desc { font-size: 12px; color: var(--text-light); line-height: 1.5; }
+
+  /* DISCLAIMER */
+  .disclaimer {
+    background: var(--violet-pale);
+    border-radius: 12px;
+    padding: 12px 14px;
+    font-size: 11.5px;
+    color: var(--text-mid);
+    line-height: 1.65;
+    margin-bottom: 1rem;
+    border-left: 3px solid var(--violet-mid);
+  }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding: 1.5rem 0 0;
+    font-size: 11px;
+    color: var(--text-light);
+  }
+  .footer a { color: var(--violet-mid); text-decoration: none; }
+
+  /* ANIMATIONS */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">Scarlet Explica</div>
+  <div class="logo-sub">salud hormonal con ciencia</div>
+</div>
+
+<div class="app">
+
+  <div class="hero">
+    <p class="hero-eyebrow">Mini-herramienta educativa</p>
+    <h1 class="hero-title">¿Lo que sentís <em>tiene nombre</em>?</h1>
+    <p class="hero-body">Respondé unas preguntas rápidas para entender qué podría estar pasando con tus hormonas. No es un diagnóstico — es un punto de partida.</p>
+  </div>
+
+  <!-- AGE GATE -->
+  <div id="age-screen">
+    <div class="age-card">
+      <div class="age-emoji">🌿</div>
+      <h2 class="age-question">¿Cuántos años tenés?</h2>
+      <p class="age-hint">Esto nos ayuda a mostrarte la información más relevante para tu momento hormonal.</p>
+      <input class="age-input" id="age-input" type="number" min="18" max="80" placeholder="ej. 38" inputmode="numeric">
+      <button class="age-cta" id="age-cta" onclick="confirmarEdad()" disabled>Continuar →</button>
+    </div>
+  </div>
+
+  <!-- APP PRINCIPAL -->
+  <div id="app-main" style="display:none;">
+
+    <div class="tabs" id="tabs-bar">
+      <button class="tab active" onclick="showSection('quiz', this)">Cuestionario</button>
+      <button class="tab" onclick="showSection('fases', this)">Las fases</button>
+      <button class="tab" onclick="showSection('sintomas', this)">¿Por qué pasa?</button>
+      <button class="tab" onclick="showSection('doctor', this)">Para tu consulta</button>
+    </div>
+
+    <!-- QUIZ -->
+    <div class="section visible" id="section-quiz">
+      <p class="section-title" id="quiz-title">¿Qué está cambiando en tu cuerpo?</p>
+      <p class="section-hint" id="quiz-hint">Seleccioná los síntomas que notaste en los últimos 3 a 6 meses. Podés marcar todos los que apliquen.</p>
+      <div class="symptoms-grid" id="symptoms-grid"></div>
+      <button class="quiz-cta" onclick="calcularResultado()">Ver qué puede estar pasando →</button>
+      <div id="quiz-result"></div>
+    </div>
+
+    <!-- FASES -->
+    <div class="section" id="section-fases">
+      <p class="section-title">Las fases de la transición</p>
+      <p class="section-hint">La perimenopausia no es un evento — es un proceso que dura en promedio 7 años. Entender en qué etapa estás cambia todo.</p>
+      <div class="phase-timeline" id="phase-timeline"></div>
+    </div>
+
+    <!-- SÍNTOMAS EXPLICADOS -->
+    <div class="section" id="section-sintomas">
+      <p class="section-title">¿Por qué pasa esto?</p>
+      <p class="section-hint">Cada síntoma tiene una explicación hormonal. Tocar para entender qué lo causa y qué puede ayudar.</p>
+      <div id="sintomas-list"></div>
+    </div>
+
+    <!-- PARA TU CONSULTA -->
+    <div class="section" id="section-doctor">
+      <p class="section-title">Preguntas para tu consulta</p>
+      <p class="section-hint">Llevá estas preguntas a tu próxima visita médica. Un/a profesional informado/a hace toda la diferencia.</p>
+      <div id="doctor-content"></div>
+    </div>
+
+  </div><!-- /app-main -->
+
+  <div class="footer">
+    <p>Herramienta educativa — no reemplaza la consulta médica</p>
+    <p style="margin-top:4px;"><a href="https://www.instagram.com/scarletexplica" target="_blank">@scarletexplica</a></p>
+  </div>
+
+</div><!-- /app -->
+
+<script>
+// ─── STATE ───────────────────────────────────────────────────────
+const selected = new Set();
+let userAge = null;
+
+// ─── DATA ────────────────────────────────────────────────────────
+const symptoms = [
+  { id: 'irregulares', label: 'Ciclos irregulares', icon: '📅' },
+  { id: 'abundantes', label: 'Menstruación abundante', icon: '🩸' },
+  { id: 'calores', label: 'Calores o sofocos', icon: '🔥' },
+  { id: 'sueno', label: 'Problemas de sueño', icon: '🌙' },
+  { id: 'ansiedad', label: 'Ansiedad o irritabilidad', icon: '🌊' },
+  { id: 'niebla', label: 'Niebla mental', icon: '🧠' },
+  { id: 'peso', label: 'Cambios de peso', icon: '⚖️' },
+  { id: 'sequedad', label: 'Sequedad vaginal', icon: '🌵' },
+  { id: 'urinario', label: 'Infecciones urinarias frecuentes', icon: '💧' },
+  { id: 'libido', label: 'Cambios en el deseo sexual', icon: '✨' },
+  { id: 'articulaciones', label: 'Dolores articulares', icon: '🦴' },
+  { id: 'corazon', label: 'Palpitaciones', icon: '❤️' },
+];
+
+const phases = [
+  {
+    name: 'Perimenopausia temprana',
+    timing: 'Aprox. desde los 35–40 años',
+    cssClass: 'peri-early',
+    body: 'Los ciclos siguen siendo regulares pero algo cambia internamente. La progesterona empieza a bajar antes de que el estrógeno lo haga. Podés notar cambios de humor, tensión premenstrual más intensa o sueño más liviano. Para muchas mujeres, esta etapa pasa desapercibida.',
+  },
+  {
+    name: 'Perimenopausia — transición activa',
+    timing: 'Promedio: 4 a 6 años antes de la menopausia',
+    cssClass: 'peri-late',
+    body: 'Los ciclos empiezan a variar — más largos, más cortos, más abundantes. El estrógeno fluctúa (puede estar más alto que nunca antes de bajar definitivamente). Sofocos, insomnio y cambios de humor son más frecuentes. Es la etapa más intensa de la transición.',
+  },
+  {
+    name: 'Menopausia',
+    timing: '1 año sin menstruación',
+    cssClass: 'meno',
+    body: 'La menopausia en sí es un momento — el día en que se cumplen 12 meses sin período. El promedio en Argentina es alrededor de los 51 años. A partir de ahí, los niveles de estrógeno se estabilizan en valores bajos. Sorprendentemente, muchas mujeres se sienten mejor en esta etapa que en la perimenopausia.',
+  },
+  {
+    name: 'Posmenopausia',
+    timing: 'Todos los años que siguen',
+    cssClass: 'post',
+    body: 'La etapa más larga. El cuerpo se adapta a los nuevos niveles hormonales. Los síntomas agudos suelen disminuir. El foco pasa a la salud a largo plazo: huesos, corazón, metabolismo y bienestar cognitivo. Con hábitos adecuados, esta puede ser una de las etapas más libres y poderosas de la vida.',
+  },
+];
+
+const symptomsDetail = [
+  {
+    name: 'Sofocos y calores',
+    explanation: 'Los sofocos ocurren porque el estrógeno fluctuante afecta el termostato del cerebro (el hipotálamo). Ante pequeñas variaciones de temperatura, dispara una respuesta de enfriamiento exagerada: vasodilatación, sudoración, sensación de calor intenso. No son peligrosos, pero pueden ser muy disruptivos.',
+    phases: ['Transición activa', 'Menopausia temprana'],
+    tip: 'Magnesio glicinato (300 mg antes de dormir) ayuda a la regulación térmica. Reducir alcohol, cafeína y comidas picantes. En casos intensos, la terapia hormonal bioidéntica tiene muy buena evidencia.',
+    tagClass: 'tag-violet',
+  },
+  {
+    name: 'Ansiedad e irritabilidad',
+    explanation: 'La progesterona tiene efecto calmante sobre el sistema nervioso — actúa sobre los receptores GABA igual que un ansiolítico natural. Cuando baja, esa protección desaparece. El resultado puede ser ansiedad, irritabilidad o sensación de estar "al límite" sin razón aparente.',
+    phases: ['Todo el proceso'],
+    tip: 'La progesterona bioidéntica puede ser transformadora si la ansiedad es predominante. El magnesio también es clave. La buena noticia: en menopausia estable, esto tiende a mejorar significativamente.',
+    tagClass: 'tag-rose',
+  },
+  {
+    name: 'Problemas de sueño',
+    explanation: 'La progesterona promueve el sueño porque calma el sistema nervioso. Sin ella, dormirse cuesta más y el sueño se fragmenta. Los sofocos nocturnos también interrumpen el descanso. Y el estrógeno bajo afecta la termorregulación nocturna. Es un efecto combinado.',
+    phases: ['Todo el proceso'],
+    tip: 'Magnesio glicinato antes de dormir. Evitar alcohol (que reduce la melatonina) y habitación fresca. La terapia hormonal puede ser muy efectiva cuando el insomnio es severo.',
+    tagClass: 'tag-amber',
+  },
+  {
+    name: 'Niebla mental y memoria',
+    explanation: 'El estrógeno tiene rol neuroprotector: mejora la plasticidad sináptica, reduce la inflamación cerebral y apoya la producción de serotonina y acetilcolina. Cuando fluctúa o baja, el cerebro se recalibra. No es demencia — es una transición neurológica.',
+    phases: ['Transición activa', 'Menopausia temprana'],
+    tip: 'El entrenamiento de fuerza tiene evidencia para la salud cerebral a largo plazo. El aceite MCT puede ayudar a la energía cognitiva. Si es muy disruptiva, la terapia hormonal es una opción a evaluar.',
+    tagClass: 'tag-amber',
+  },
+  {
+    name: 'Ciclos irregulares o abundantes',
+    explanation: 'En perimenopausia temprana, la progesterona cae primero — pero el estrógeno puede seguir alto. Sin progesterona para equilibrar el endometrio, la menstruación se vuelve más abundante. Más adelante, los ciclos se alargan y acortan de forma impredecible a medida que la ovulación se vuelve intermitente.',
+    phases: ['Perimenopausia temprana', 'Transición activa'],
+    tip: 'La progesterona bioidéntica es el tratamiento más específico para el sangrado abundante perimenopaúsico. Ante sangrado muy intenso o prolongado, siempre consultar con un/a profesional.',
+    tagClass: 'tag-rose',
+  },
+  {
+    name: 'Cambios de peso y acumulación abdominal',
+    explanation: 'El estrógeno ayuda a mantener la sensibilidad a la insulina. Cuando baja, el cuerpo tiende a la resistencia insulínica — favoreciendo el almacenamiento de grasa abdominal. También cambia la distribución: la grasa migra de caderas y muslos hacia el abdomen. No es falta de voluntad, es fisiología.',
+    phases: ['Transición activa', 'Menopausia'],
+    tip: 'Proteína en cada comida (especialmente en el desayuno), entrenamiento de fuerza y reducir azúcar refinada son las estrategias con mayor evidencia. Medir insulina en ayunas (no solo glucosa) puede ser muy informativo.',
+    tagClass: 'tag-amber',
+  },
+  {
+    name: 'Sequedad vaginal y síntomas urinarios',
+    explanation: 'El tejido vaginal, uretral y vesical tiene receptores de estrógeno. Cuando el estrógeno baja, ese tejido se adelgaza, pierde lubricación y se vuelve más vulnerable. Esto puede causar sequedad, ardor, molestias en las relaciones sexuales y mayor susceptibilidad a infecciones urinarias.',
+    phases: ['Menopausia', 'Posmenopausia'],
+    tip: 'El estrógeno vaginal local (crema o óvulo) tiene excelente evidencia y mínima absorción sistémica. Los probióticos con Lactobacillus rhamnosus GR-1 + reuteri RC-14 tienen buena evidencia para la salud vaginal.',
+    tagClass: 'tag-violet',
+  },
+  {
+    name: 'Infecciones urinarias frecuentes',
+    explanation: 'Con el estrógeno bajo, la mucosa uretral y vesical se vuelve más delgada y menos resistente. Además, la microbiota vaginal cambia — menos lactobacilos protectores, más vulnerabilidad. El resultado puede ser infecciones urinarias recurrentes sin una causa infecciosa "nueva".',
+    phases: ['Menopausia', 'Posmenopausia'],
+    tip: 'El estrógeno vaginal local es el tratamiento más efectivo para infecciones urinarias recurrentes posmenopáusicas. Los probióticos específicos (Lactobacillus rhamnosus GR-1 y Lactobacillus reuteri RC-14) también tienen evidencia.',
+    tagClass: 'tag-violet',
+  },
+];
+
+const doctorCategories = [
+  {
+    title: 'Para entender dónde estás',
+    questions: [
+      '¿Podría estar en perimenopausia aunque mis ciclos sean regulares?',
+      '¿Qué análisis de laboratorio serían útiles en este momento?',
+      '¿Tiene sentido medir FSH, estradiol y progesterona en fase lútea?',
+    ],
+  },
+  {
+    title: 'Sobre síntomas específicos',
+    questions: [
+      'Tengo [síntoma] — ¿puede estar relacionado con cambios hormonales?',
+      '¿Hay algo que pueda hacer ahora mismo para mejorar el sueño / los sofocos / el estado de ánimo?',
+      '¿El sangrado abundante que tengo justifica algún estudio?',
+    ],
+  },
+  {
+    title: 'Sobre terapia hormonal',
+    questions: [
+      '¿Soy candidata para terapia hormonal bioidéntica?',
+      '¿Cuáles son los beneficios y riesgos reales para mi caso particular?',
+      '¿Cuál es la diferencia entre progesterona bioidéntica y progestinas sintéticas?',
+    ],
+  },
+  {
+    title: 'Salud a largo plazo',
+    questions: [
+      '¿Debería hacer una densitometría ósea? ¿Cuándo?',
+      '¿Qué cambios en el estilo de vida tienen más impacto en esta etapa?',
+      '¿Hay algo que quiera monitorear en relación a riesgo cardiovascular o metabólico?',
+    ],
+  },
+];
+
+// ─── AGE GATE ────────────────────────────────────────────────────
+document.getElementById('age-input').addEventListener('input', function() {
+  const v = parseInt(this.value);
+  document.getElementById('age-cta').disabled = !(v >= 18 && v <= 80);
+});
+document.getElementById('age-input').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') confirmarEdad();
+});
+
+function confirmarEdad() {
+  const v = parseInt(document.getElementById('age-input').value);
+  if (!(v >= 18 && v <= 80)) return;
+  userAge = v;
+  document.getElementById('age-screen').style.display = 'none';
+  document.getElementById('app-main').style.display = 'block';
+
+  if (userAge < 35) {
+    document.getElementById('quiz-title').textContent = '¿Qué está cambiando en tu cuerpo?';
+    document.getElementById('quiz-hint').textContent = 'Seleccioná los síntomas que notaste en los últimos 3 a 6 meses. No es un diagnóstico — es una brújula educativa para entender tu panorama hormonal.';
+  } else {
+    document.getElementById('quiz-title').textContent = '¿Qué está cambiando en tu cuerpo?';
+    document.getElementById('quiz-hint').textContent = 'Seleccioná los síntomas que notaste en los últimos 3 a 6 meses. Podés marcar todos los que apliquen.';
+  }
+}
+
+// ─── TABS ────────────────────────────────────────────────────────
+function showSection(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('visible'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('section-' + id).classList.add('visible');
+  btn.classList.add('active');
+}
+
+// ─── BUILD QUIZ ──────────────────────────────────────────────────
+function buildQuiz() {
+  const grid = document.getElementById('symptoms-grid');
+  symptoms.forEach(s => {
+    const chip = document.createElement('div');
+    chip.className = 'sym-chip';
+    chip.dataset.id = s.id;
+    chip.innerHTML = `<span class="chip-icon">${s.icon}</span><span>${s.label}</span>`;
+    chip.addEventListener('click', () => {
+      chip.classList.toggle('selected');
+      if (selected.has(s.id)) selected.delete(s.id);
+      else selected.add(s.id);
+    });
+    grid.appendChild(chip);
+  });
+}
+
+// ─── RESULT HELPERS ─────────────────────────────────────────────
+function buildSummaryCard() {
+  const names = Array.from(selected).map(id => {
+    const s = symptoms.find(x => x.id === id);
+    return s ? s.label : '';
+  }).filter(Boolean);
+  if (names.length === 0) return '';
+  return `<div class="summary-card">
+    <p class="summary-title">Síntomas que seleccionaste</p>
+    <div class="summary-tags">${names.map(n => `<span class="summary-tag">${n}</span>`).join('')}</div>
+  </div>`;
+}
+
+function buildIGLink() {
+  return `<a class="ig-link" href="https://www.instagram.com/scarletexplica" target="_blank">
+    📷 Seguime en @scarletexplica para más contenido así
+  </a>`;
+}
+
+function buildResetBtn() {
+  return `<button class="reset-btn" onclick="resetQuiz()">← Volver a empezar</button>`;
+}
+
+// ─── CALCULAR RESULTADO ──────────────────────────────────────────
+function calcularResultado() {
+  if (selected.size === 0) {
+    alert('Seleccioná al menos un síntoma para continuar.');
+    return;
+  }
+
+  const resultDiv = document.getElementById('quiz-result');
+  const summaryHTML = buildSummaryCard();
+  const igHTML = buildIGLink();
+  const resetHTML = buildResetBtn();
+  document.getElementById('symptoms-grid').style.display = 'none';
+  document.querySelector('.quiz-cta').style.display = 'none';
+  resultDiv.style.display = 'block';
+
+  // ── MENORES DE 35 ──
+  if (userAge !== null && userAge < 35) {
+    resultDiv.innerHTML = summaryHTML + `
+      <div class="nonperi-card">
+        <p class="nonperi-eyebrow">Tu perfil hormonal</p>
+        <h2 class="nonperi-title">Tus síntomas tienen explicación hormonal — y probablemente no sea la menopausia</h2>
+        <p class="nonperi-body">Con ${userAge} años, la perimenopausia es poco probable como causa principal. Pero eso no significa que lo que sentís no sea real ni hormonal.</p>
+        <p class="nonperi-body" style="margin-top:8px;">Algunas causas frecuentes en mujeres jóvenes con síntomas similares:</p>
+        <ul class="cause-list">
+          <li class="cause-item"><span class="cause-dot"></span><span><strong>Déficit de progesterona</strong> — puede ocurrir aunque la menstruación sea regular. La progesterona cae antes de que se noten cambios en el ciclo.</span></li>
+          <li class="cause-item"><span class="cause-dot"></span><span><strong>Disfunción tiroidea</strong> — el hipotiroidismo subclínico puede imitar muchos síntomas hormonales.</span></li>
+          <li class="cause-item"><span class="cause-dot"></span><span><strong>Síndrome de ovario poliquístico (SOP)</strong> — con desequilibrio estrogénico y síntomas variados.</span></li>
+          <li class="cause-item"><span class="cause-dot"></span><span><strong>Déficit de nutrientes</strong> — hierro, vitamina D, zinc y magnesio impactan directamente en la salud hormonal.</span></li>
+        </ul>
+        <p class="nonperi-body" style="margin-top:12px;">La buena noticia: todas estas causas tienen solución. Un/a profesional con perspectiva hormonal puede ayudarte a identificar qué está pasando.</p>
+      </div>
+      <div class="disclaimer">Esta herramienta es educativa y no reemplaza la evaluación médica. Si los síntomas son intensos o persistentes, consultá con un/a profesional.</div>
+      ${igHTML}${resetHTML}`;
+    return;
+  }
+
+  // ── 35+ ──
+  const count = selected.size;
+  let phase, title, body;
+
+  const earlySymptoms = ['irregulares', 'abundantes', 'ansiedad', 'sueno'];
+  const lateSymptoms = ['calores', 'niebla', 'peso', 'articulaciones', 'corazon'];
+  const menoSymptoms = ['sequedad', 'urinario', 'libido'];
+
+  const earlyCount = earlySymptoms.filter(s => selected.has(s)).length;
+  const lateCount = lateSymptoms.filter(s => selected.has(s)).length;
+  const menoCount = menoSymptoms.filter(s => selected.has(s)).length;
+
+  if (menoCount >= 2 || (menoCount >= 1 && count >= 4)) {
+    phase = 'Menopausia o posmenopausia';
+    title = 'Tu perfil sugiere una etapa avanzada de la transición hormonal';
+    body = `Con ${count} síntomas, y especialmente la presencia de síntomas genitourinarios (sequedad, infecciones, cambios en el deseo), tu cuerpo podría estar en menopausia o posmenopausia. Esta etapa tiene sus propias herramientas de apoyo — y muchas mujeres se sienten mucho mejor con el acompañamiento adecuado.`;
+  } else if (lateCount >= 2 || count >= 5) {
+    phase = 'Transición activa (perimenopausia)';
+    title = 'Tu perfil es consistente con una transición perimenopáusica activa';
+    body = `Con ${count} síntomas distribuidos en diferentes sistemas, esto se parece a la etapa más intensa de la transición. El estrógeno fluctúa, la progesterona sigue bajando, y el cuerpo se está adaptando a un nuevo equilibrio. Esto es temporal — pero tiene mucho sentido buscar apoyo ahora.`;
+  } else if (earlyCount >= 1 || count >= 2) {
+    phase = 'Perimenopausia temprana';
+    title = 'Tu perfil puede corresponder a perimenopausia temprana';
+    body = `Con ${count} síntomas, especialmente cambios en el ciclo y el estado de ánimo, podrías estar en las etapas iniciales de la transición hormonal. En esta etapa, los ciclos suelen seguir siendo regulares — pero algo ya está cambiando internamente. Es un buen momento para informarse y estar atenta.`;
+  } else {
+    phase = 'Posible inicio de transición';
+    title = 'Algo está cambiando — aunque sea sutil';
+    body = `Aunque elegiste pocos síntomas, los cambios hormonales pueden empezar de forma muy gradual. Si notás que algo está diferente en tu cuerpo respecto a cómo eras antes, eso ya es información valiosa. Explorá las otras secciones para entender mejor el proceso.`;
+  }
+
+  resultDiv.innerHTML = summaryHTML + `
+    <div class="result-card">
+      <p class="result-eyebrow">Tu perfil hormonal</p>
+      <h2 class="result-title">${title}</h2>
+      <p class="result-body">${body}</p>
+      <span class="result-phase">${phase}</span>
+    </div>
+    <div class="result-card" style="background:var(--violet-pale); border-color:var(--violet-light);">
+      <p class="result-eyebrow">Próximo paso</p>
+      <p class="result-body" style="margin-bottom:0;">Explorá la pestaña <strong>"Las fases"</strong> para ubicarte en el proceso, <strong>"¿Por qué pasa?"</strong> para entender cada síntoma, y <strong>"Para tu consulta"</strong> si querés ir preparada a una consulta médica.</p>
+    </div>
+    <div class="disclaimer">Esta herramienta es educativa y no reemplaza la evaluación médica. Ante síntomas intensos o persistentes, consultá con un/a profesional.</div>
+    ${igHTML}${resetHTML}`;
+}
+
+function resetQuiz() {
+  selected.clear();
+  document.querySelectorAll('.sym-chip').forEach(c => c.classList.remove('selected'));
+  document.getElementById('quiz-result').style.display = 'none';
+  document.getElementById('quiz-result').innerHTML = '';
+  document.getElementById('symptoms-grid').style.display = 'grid';
+  document.querySelector('.quiz-cta').style.display = 'block';
+}
+
+// ─── BUILD FASES ─────────────────────────────────────────────────
+function buildFases() {
+  const container = document.getElementById('phase-timeline');
+  phases.forEach(p => {
+    const el = document.createElement('div');
+    el.className = `phase-item ${p.cssClass}`;
+    el.innerHTML = `<p class="phase-name">${p.name}</p>
+      <p class="phase-timing">${p.timing}</p>
+      <p class="phase-body">${p.body}</p>`;
+    container.appendChild(el);
+  });
+
+  // Bibliografía
+  container.insertAdjacentHTML('afterend', `
+    <div class="biblio-card" style="margin-top:1rem;">
+      <span class="biblio-icon">📚</span>
+      <div>
+        <p class="biblio-title">Fuente principal</p>
+        <p class="biblio-desc">Lara Briden — <em>Hormone Repair Manual</em> (2021). Guía basada en evidencia para la salud hormonal femenina después de los 40.</p>
+      </div>
+    </div>`);
+}
+
+// ─── BUILD SÍNTOMAS ──────────────────────────────────────────────
+function buildSintomas() {
+  const container = document.getElementById('sintomas-list');
+  symptomsDetail.forEach(s => {
+    const item = document.createElement('div');
+    item.className = 'sym-accordion';
+    const phasesHTML = s.phases.map(ph => `<span class="tag ${s.tagClass}">${ph}</span>`).join('');
+    item.innerHTML = `<div class="sym-head" onclick="toggleSintoma(this.parentElement)">
+        <span class="sym-label">${s.name}</span>
+        <span class="sym-chevron">▼</span>
+      </div>
+      <div class="sym-body">
+        <p class="sym-explanation">${s.explanation}</p>
+        <div class="tag-row">${phasesHTML}</div>
+        <div class="sym-tip"><strong>Qué puede ayudar:</strong> ${s.tip}</div>
+      </div>`;
+    container.appendChild(item);
+  });
+}
+
+function toggleSintoma(item) {
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.sym-accordion').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+// ─── BUILD DOCTOR ────────────────────────────────────────────────
+function buildDoctor() {
+  const container = document.getElementById('doctor-content');
+  let html = '';
+  doctorCategories.forEach(cat => {
+    html += `<div class="doc-category">
+      <p class="doc-cat-title">${cat.title}</p>`;
+    cat.questions.forEach(q => {
+      html += `<div class="doc-q"><span class="doc-q-mark">?</span><span>${q}</span></div>`;
+    });
+    html += `</div>`;
+  });
+  container.innerHTML = html;
+}
+
+// ─── INIT ────────────────────────────────────────────────────────
+buildQuiz();
+buildFases();
+buildSintomas();
+buildDoctor();
+</script>
+</body>
+</html>
